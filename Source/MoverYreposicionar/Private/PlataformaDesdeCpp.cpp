@@ -27,6 +27,7 @@ void APlataformaDesdeCpp::BeginPlay()
 	Super::BeginPlay();
 }
 
+
 // Called every frame
 void APlataformaDesdeCpp::Tick(float DeltaTime)
 {
@@ -65,13 +66,13 @@ void APlataformaDesdeCpp::MoverConSuma(float framePorSecond)
 {
 	if(GetActorLocation().X < _DatosGlobales->cuandoLlegaHasta.X)
 	{
-		calcularMovimiento = GetActorLocation().X + _DatosGlobales->velocidad.X * framePorSecond;
-		SetActorLocation(FVector(calcularMovimiento,0,0));
+		calcularMovimiento = _DatosGlobales->velocidad.X * framePorSecond;
+		SetActorLocation(FVector(GetActorLocation().X + calcularMovimiento,GetActorLocation().Y,GetActorLocation().Z));
 	}
 	else
 	{
 		FVector ReiniciarPlataforma = FVector(0,0,0);
-		ReiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X;
+		ReiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X + calcularMovimiento;
 		ReiniciarPlataforma.Y = GetActorLocation().Y;
 		ReiniciarPlataforma.Z = GetActorLocation().Z;
 		SetActorLocation(ReiniciarPlataforma);

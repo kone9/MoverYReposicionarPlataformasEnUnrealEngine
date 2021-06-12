@@ -46,7 +46,5 @@ private:
 	void MoverConSuma(float framePorSecond);// para mover usando suma de posicion
 
 	float calcularMovimiento;
-	
-
 
 };
