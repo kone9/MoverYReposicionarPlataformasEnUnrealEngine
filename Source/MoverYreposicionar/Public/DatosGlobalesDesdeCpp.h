@@ -28,6 +28,9 @@ public:
 	FVector velocidad = FVector(10,0,0);
 
 	UPROPERTY(EditAnywhere)
+	FVector velocidadConOFfset = FVector(10,0,0);//velocidad usada solo para mover con offset
+
+	UPROPERTY(EditAnywhere)
 	FVector posicionReinicio = FVector(-2000,0,0);
 
 	UPROPERTY(EditAnywhere)

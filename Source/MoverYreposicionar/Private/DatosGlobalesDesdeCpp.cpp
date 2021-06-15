@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "Components/InputComponent.h"
 
+
 // Sets default values
 ADatosGlobalesDesdeCpp::ADatosGlobalesDesdeCpp()
 {
@@ -24,7 +25,7 @@ void ADatosGlobalesDesdeCpp::BeginPlay()
 void ADatosGlobalesDesdeCpp::ActivarTeclas()
 {
 	EnableInput( GetWorld()->GetFirstPlayerController() );//habilito el player controller aca
-
+	
 	UInputComponent* myInputComp = this->InputComponent; //input variable desde actor.h
 
 	if(myInputComp)//si hay un input mio

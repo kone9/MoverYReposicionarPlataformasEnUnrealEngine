@@ -14,7 +14,7 @@ APlataformaDesdeCpp::APlataformaDesdeCpp()
 	//creo el root ojo es un puntero declarado en .h como visible 
 	RootOfBlueprint = CreateDefaultSubobject<USceneComponent>(TEXT("RootOfBlueprint"));
 	RootComponent = RootOfBlueprint;
-
+	
 	plataforma = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("plataforma"));
 	plataforma->AttachTo(RootOfBlueprint);
 
@@ -47,17 +47,18 @@ void APlataformaDesdeCpp::Tick(float DeltaTime)
 //para mover con el metodo offset
 void APlataformaDesdeCpp::MoverConOFfset()
 {
-	if(GetActorLocation().X < _DatosGlobales->cuandoLlegaHasta.X - _DatosGlobales->velocidad.X)
+	if(GetActorLocation().X < _DatosGlobales->cuandoLlegaHasta.X - _DatosGlobales->velocidadConOFfset.X)//si la posicion es menor a la posición de reinicio menos la velocidad para evitar el desplazamiento
 	{
-		AddActorWorldOffset(_DatosGlobales->velocidad);
+		AddActorWorldOffset(_DatosGlobales->velocidadConOFfset); //muevo con el offset segun la velocidad el offset mueve con el delta frame
 	}
-	else
+	else //sino reinicio
 	{
-		FVector ReiniciarPlataforma = FVector(0,0,0);
-		ReiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X;
-		ReiniciarPlataforma.Y = GetActorLocation().Y;
-		ReiniciarPlataforma.Z = GetActorLocation().Z;
-		SetActorLocation(ReiniciarPlataforma);
+		FVector reiniciarPlataforma = FVector(0,0,0);
+		reiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X;
+		reiniciarPlataforma.Y = GetActorLocation().Y;
+		reiniciarPlataforma.Z = GetActorLocation().Z;
+		
+		SetActorLocation(reiniciarPlataforma);
 	}
 }
 
@@ -66,16 +67,25 @@ void APlataformaDesdeCpp::MoverConSuma(float framePorSecond)
 {
 	if(GetActorLocation().X < _DatosGlobales->cuandoLlegaHasta.X)
 	{
-		calcularMovimiento = _DatosGlobales->velocidad.X * framePorSecond;
-		SetActorLocation(FVector(GetActorLocation().X + calcularMovimiento,GetActorLocation().Y,GetActorLocation().Z));
+		calcularMovimiento = _DatosGlobales->velocidad.X * framePorSecond; //el movimiento es igual a la velocidad en X por el frame
+		//vector de movimiento
+		FVector posicionNueva = FVector(
+			GetActorLocation().X + calcularMovimiento, //aumenta la posición actual
+			GetActorLocation().Y, //posicion en Y
+			GetActorLocation().Z //posicion en z
+		);
+		SetActorLocation(posicionNueva);//muevo el actor
 	}
 	else
 	{
-		FVector ReiniciarPlataforma = FVector(0,0,0);
-		ReiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X + calcularMovimiento;
-		ReiniciarPlataforma.Y = GetActorLocation().Y;
-		ReiniciarPlataforma.Z = GetActorLocation().Z;
-		SetActorLocation(ReiniciarPlataforma);
+		//vector de reinicio
+		FVector reiniciarPlataforma = FVector( 
+				_DatosGlobales->posicionReinicio.X + calcularMovimiento, //obtengo la posicion de reinicio desde datos globales mas el movimiento
+				GetActorLocation().Y, //posicion en Y
+				GetActorLocation().Z //posicion en z
+			);
+
+		SetActorLocation(reiniciarPlataforma);//cambio la posición del actor
 	}
 }
 
