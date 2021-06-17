@@ -25,6 +25,8 @@ APlataformaDesdeCpp::APlataformaDesdeCpp()
 void APlataformaDesdeCpp::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetWorld()->GetTimerManager().SetTimer(timerMovimiento, this, &APlataformaDesdeCpp::MoverConOFfset, _DatosGlobales->tiempoParaAumentarVelocidadMovimiento, true);
 }
 
 
@@ -33,14 +35,14 @@ void APlataformaDesdeCpp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if(_DatosGlobales->puedoMoverConOffset)
-	{
-		MoverConOFfset();//para mover con el nodo offset
-	}
-	else
-	{
-		MoverConSuma(DeltaTime);//para mover con suma
-	}	
+	// if(_DatosGlobales->puedoMoverConOffset)
+	// {
+	// 	MoverConOFfset();//para mover con el nodo offset
+	// }
+	// else
+	// {
+	// 	MoverConSuma(DeltaTime);//para mover con suma
+	// }	
 
 }
 
@@ -50,9 +52,10 @@ void APlataformaDesdeCpp::MoverConOFfset()
 	
 	AddActorWorldOffset(_DatosGlobales->velocidadConOFfset); //muevo con el offset segun la velocidad el offset mueve con el delta frame
 	
-	if(GetActorLocation().X >= _DatosGlobales->cuandoLlegaHasta.X - calcularMovimiento)
+	if(GetActorLocation().X >= _DatosGlobales->cuandoLlegaHasta.X)
 	{
 		FVector reiniciarPlataforma = FVector(0,0,0);
+		
 		reiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X;
 		
 		reiniciarPlataforma.Y = GetActorLocation().Y;
