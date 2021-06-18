@@ -43,7 +43,7 @@ public:
 	UPROPERTY(EditAnywhere);
 	float velocidadAumentada = 10;//la velicidad que sera aumentada en cada tiempo
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	bool aumentarVelocidadAutomaticamente = false;//PARA CAMBIAR lA FORMA DE MOVER
 	
 	UPROPERTY(EditAnywhere);

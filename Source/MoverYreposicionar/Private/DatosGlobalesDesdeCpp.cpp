@@ -56,12 +56,14 @@ void ADatosGlobalesDesdeCpp::NoPuedoAumentarDificultad()//para el input
 	aumentarVelocidadAutomaticamente = false;
 	GetWorld()->GetTimerManager().ClearTimer(timerDificultad);
 	velocidad = FVector(1500,0,0);
+	velocidadConOFfset = FVector(100,0,0);
 }
 
 
 void ADatosGlobalesDesdeCpp::AumentarDificultad()//para el timer
 {
 	velocidad.X = velocidad.X + velocidadAumentada;
+	velocidadConOFfset.X = velocidadConOFfset.X + velocidadAumentada;
 }
 
 

@@ -26,7 +26,7 @@ void APlataformaDesdeCpp::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->GetTimerManager().SetTimer(timerMovimiento, this, &APlataformaDesdeCpp::MoverConOFfset, _DatosGlobales->tiempoParaAumentarVelocidadMovimiento, true);
+	// GetWorld()->GetTimerManager().SetTimer(timerMovimiento, this, &APlataformaDesdeCpp::MoverConOFfset, _DatosGlobales->tiempoParaAumentarVelocidadMovimiento, true);
 }
 
 
@@ -35,14 +35,14 @@ void APlataformaDesdeCpp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	// if(_DatosGlobales->puedoMoverConOffset)
-	// {
-	// 	MoverConOFfset();//para mover con el nodo offset
-	// }
-	// else
-	// {
-	// 	MoverConSuma(DeltaTime);//para mover con suma
-	// }	
+	if(_DatosGlobales->puedoMoverConOffset)
+	{
+		MoverConOFfset();//para mover con el nodo offset
+	}
+	else
+	{
+		MoverConSuma(DeltaTime);//para mover con suma
+	}	
 
 }
 
@@ -71,28 +71,28 @@ void APlataformaDesdeCpp::MoverConOFfset()
 void APlataformaDesdeCpp::MoverConSuma(float framePorSecond)
 {
 	
-	calcularMovimiento = _DatosGlobales->velocidad.X * framePorSecond; //el movimiento es igual a la velocidad en X por el frame
+	calcularMovimiento = GetActorLocation().X + _DatosGlobales->velocidad.X * framePorSecond; //el movimiento es igual a la velocidad en X por el frame
 	//vector de movimiento
 	FVector posicionNueva = FVector(
-		GetActorLocation().X + calcularMovimiento, //aumenta la posición actual
+		calcularMovimiento, //aumenta la posición actual
 		GetActorLocation().Y, //posicion en Y
 		GetActorLocation().Z //posicion en z
 	);
 
 	SetActorLocation(posicionNueva);//muevo el actor
 	
-	//reposicionar
-	if(GetActorLocation().X >= _DatosGlobales->cuandoLlegaHasta.X - calcularMovimiento)
-	{
-		//vector de reinicio
-		FVector reiniciarPlataforma = FVector( 
-				_DatosGlobales->posicionReinicio.X + calcularMovimiento, //obtengo la posicion de reinicio desde datos globales mas el movimiento
-				GetActorLocation().Y, //posicion en Y
-				GetActorLocation().Z //posicion en z
-			);
+	// //reposicionar
+	// if(GetActorLocation().X >= _DatosGlobales->cuandoLlegaHasta.X - calcularMovimiento)
+	// {
+	// 	//vector de reinicio
+	// 	FVector reiniciarPlataforma = FVector( 
+	// 			_DatosGlobales->posicionReinicio.X + calcularMovimiento, //obtengo la posicion de reinicio desde datos globales mas el movimiento
+	// 			GetActorLocation().Y, //posicion en Y
+	// 			GetActorLocation().Z //posicion en z
+	// 		);
 
-		SetActorLocation(reiniciarPlataforma);//cambio la posición del actor
-	}
+	// 	SetActorLocation(reiniciarPlataforma);//cambio la posición del actor
+	// }
 
 }
 

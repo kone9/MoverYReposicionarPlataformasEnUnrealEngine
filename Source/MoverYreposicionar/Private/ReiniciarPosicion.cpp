@@ -32,10 +32,10 @@ void UReiniciarPosicion::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
-	if(plataforma->GetActorLocation().X > _DatosGlobales->cuandoLlegaHasta.X)
+	if(plataforma->GetActorLocation().X >= _DatosGlobales->cuandoLlegaHasta.X)
 	{
 		FVector reiniciarPlataforma = FVector(
-			_DatosGlobales->posicionReinicio.X + _DatosGlobales->velocidadConOFfset.X,
+			_DatosGlobales->posicionReinicio.X,
 			plataforma->GetActorLocation().Y,
 			plataforma->GetActorLocation().Z
 		);
