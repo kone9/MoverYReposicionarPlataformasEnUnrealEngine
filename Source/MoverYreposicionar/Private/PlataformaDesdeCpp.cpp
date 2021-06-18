@@ -49,20 +49,22 @@ void APlataformaDesdeCpp::Tick(float DeltaTime)
 //para mover con el metodo offset
 void APlataformaDesdeCpp::MoverConOFfset()
 {
-	
+	// if(GetActorLocation().X < _DatosGlobales->cuandoLlegaHasta.X)
+	// {
 	AddActorWorldOffset(_DatosGlobales->velocidadConOFfset); //muevo con el offset segun la velocidad el offset mueve con el delta frame
-	
-	if(GetActorLocation().X >= _DatosGlobales->cuandoLlegaHasta.X)
-	{
-		FVector reiniciarPlataforma = FVector(0,0,0);
+	// }
+	// else
+	// {
+	// 	FVector reiniciarPlataforma = FVector(
+	// 		_DatosGlobales->posicionReinicio.X + _DatosGlobales->velocidadConOFfset.X,
+	// 		GetActorLocation().Y,
+	// 		GetActorLocation().Z
+	// 	);
 		
-		reiniciarPlataforma.X = _DatosGlobales->posicionReinicio.X;
-		
-		reiniciarPlataforma.Y = GetActorLocation().Y;
-		reiniciarPlataforma.Z = GetActorLocation().Z;
-		
-		SetActorLocation(reiniciarPlataforma);
-	}
+	// 	SetActorLocation(reiniciarPlataforma);
+	// 	UE_LOG(LogTemp, Warning, TEXT("reinicia posicion"));
+	// }
+
 }
 
 //para mover haciendo el calculo de la suma
